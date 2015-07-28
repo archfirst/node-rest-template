@@ -10,18 +10,13 @@ module.exports = {
 
 var knex = require('./db').knex;
 var joinjs = require('join-js');
-var errors = require('./../../infrastructure/errors');
 var resultMaps = require('./resultmaps');
-var domain = require('../../domain');
-var Account = domain.Account;
+var Account = require('../../domain').Account;
 
 /**
  * Creates a new account and inserts it in to the database.
- * @param {Object} accountData - Full account data, excluding the id. For example:
- * {
- *     name: 'Cash'
- * }
- * @return {Promise} A promise that returns a full copy of the inserted account (including the id) on fulfillment.
+ * @param {Object} accountData minus the id
+ * @return {Promise} A promise that returns the inserted account (including the id)
  */
 function createAccount(accountData) {
 
@@ -38,12 +33,8 @@ function createAccount(accountData) {
 
 /**
  * Updates an existing account.
- * @param {Object} accountData - Full account data, including the id. For example:
- * {
- *     id: 1,
- *     name: 'Cash'
- * }
- * @return {Promise} A promise that returns a full copy of the updated account on fulfillment.
+ * @param {Object} accountData including the id
+ * @return {Promise} A promise that returns the updated account (including the id)
  */
 function updateAccount(accountData) {
 
@@ -60,7 +51,7 @@ function updateAccount(accountData) {
 /**
  * Gets an existing account.
  * @param {integer} id
- * @return {Promise} A promise that returns the desired account on fulfillment.
+ * @return {Promise} A promise that returns the desired account.
  */
 function getAccount(id) {
     return knex
@@ -70,15 +61,12 @@ function getAccount(id) {
 
         .then(function(resultSet) {
             return joinjs.mapOne(resultSet, resultMaps, 'accountMap');
-        })
-        .catch(joinjs.NotFoundError, function(e) {
-            throw new errors.NotFoundError(e.message);
         });
 }
 
 /**
  * Gets all accounts.
- * @return {Promise} A promise that returns an array of all accounts on fulfillment.
+ * @return {Promise} A promise that returns an array of all accounts.
  */
 function getAccounts() {
     return knex

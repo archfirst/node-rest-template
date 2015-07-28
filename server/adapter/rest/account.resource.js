@@ -10,21 +10,21 @@ module.exports = {
 function addRoutes(api) {
     api.post('/accounts', createAccount);
     api.put('/accounts/:id', updateAccount);
-    api.get('/accounts', getAccounts);
     api.get('/accounts/:id', getAccount);
+    api.get('/accounts', getAccounts);
     api.delete('/accounts/:id', deleteAccount);
 }
-
 
 var infrastructure = require('../../infrastructure');
 var log = infrastructure.logger;
 var errors = infrastructure.errors;
 
-var application = require('../../application');
-var accountService = application.accountService;
+var accountService = require('../../application').accountService;
 
 /**
- * Creates a new account.
+ * Creates a new account and inserts it in to the database.
+ * @param {Object} req - req.body contains accountData minus the id
+ * @param {Object} res - res.body contains the inserted account (including the id)
  */
 function createAccount(req, res) {
 
@@ -42,6 +42,8 @@ function createAccount(req, res) {
 
 /**
  * Updates an existing account.
+ * @param {Object} req - req.body contains accountData including the id
+ * @param {Object} res - res.body contains the updated account (including the id)
  */
 function updateAccount(req, res) {
 
@@ -59,6 +61,8 @@ function updateAccount(req, res) {
 
 /**
  * Gets an existing account.
+ * @param {Object} req - req.params.id contains id of the account to get
+ * @param {Object} res - res.body contains the requested account
  */
 function getAccount(req, res) {
 
@@ -79,6 +83,8 @@ function getAccount(req, res) {
 
 /**
  * Gets all accounts.
+ * @param {Object} req - no used
+ * @param {Object} res - res.body contains an array of all accounts
  */
 function getAccounts(req, res) {
     accountService.getAccounts()
@@ -93,6 +99,8 @@ function getAccounts(req, res) {
 
 /**
  * Deletes an account.
+ * @param {Object} req - req.params.id contains id of the account to delete
+ * @param {Object} res - res.body contains no content
  */
 function deleteAccount(req, res) {
 
