@@ -1,0 +1,12 @@
+# Ignore Node modules
+node_modules
+
+# Ignore Web Storm
+.idea
+
+# Ignore logs
+*.log
+
+# Ignore OS generated files
+.DS_Store*
+Thumbs.db
