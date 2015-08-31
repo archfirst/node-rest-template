@@ -34,7 +34,7 @@ Check out the following projects to see how this template can be used to build r
 
 - Clone this repo
 
-- Make sure that `server/infrastructure/db.js` has the correct database parameters
+- Make sure that `server/application/persistence/db.js` has the correct database parameters
 
 ## Quick Start
 Run the application locally:
