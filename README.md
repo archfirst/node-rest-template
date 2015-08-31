@@ -19,6 +19,8 @@ Check out the following projects to see how this template can be used to build r
 
 - Install Postgres and postgresql93-devel (development header files and libraries)
 
+- Clone this repo
+
 - Create a database called `demo` and create the tables needed by the app
 
         $ cd sql
@@ -31,8 +33,6 @@ Check out the following projects to see how this template can be used to build r
 - Type `npm install -g node-inspector node-gyp gulp bunyan`
     - node-gyp is required for `npm install` to succeed
     - bunyan is required for displaying the application log in a human readable format
-
-- Clone this repo
 
 - Make sure that `server/application/persistence/db.js` has the correct database parameters
 
