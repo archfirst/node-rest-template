@@ -5,7 +5,7 @@ var knex = persistence.knex;
 
 var myHooks = function() {
 
-    this.Before(function(callback) {
+    this.Before(function(scenario, callback) {
 
         // Truncate tables
         knex.raw('truncate table accounts cascade')

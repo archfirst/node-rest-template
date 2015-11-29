@@ -7,7 +7,7 @@ var errors = require(process.cwd() + '/server/infrastructure').errors;
 var accountService = application.accountService;
 
 
-var World = function World(callback) {
+var World = function World() {
     // Cached objects
     this.account = undefined;
 
@@ -66,8 +66,6 @@ var World = function World(callback) {
                 callback();
             });
     };
-
-    callback();
 };
 
 module.exports = {
